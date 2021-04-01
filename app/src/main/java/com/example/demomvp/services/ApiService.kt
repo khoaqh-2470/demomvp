@@ -9,12 +9,15 @@ import java.net.URL
 class ApiService {
     fun httpGet(myURL: String?): String {
         val url = URL(myURL)
-        val httpURLConnection = url.openConnection() as HttpURLConnection
-        httpURLConnection.connectTimeout = 15000
-        httpURLConnection.readTimeout = 15000
-        httpURLConnection.requestMethod = Constants.METHOD_GET
-        httpURLConnection.doOutput = true
-        httpURLConnection.connect()
+        val httpURLConnection = url.openConnection().let {
+            it as HttpURLConnection
+        }.apply {
+            connectTimeout = 15000
+            readTimeout = 15000
+            requestMethod = Constants.METHOD_GET
+            doOutput = true
+            connect()
+        }
 
         val bufferedReader = BufferedReader(InputStreamReader(url.openStream()))
         val stringBuilder = StringBuilder()

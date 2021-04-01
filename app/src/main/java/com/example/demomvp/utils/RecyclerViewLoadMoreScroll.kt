@@ -11,7 +11,7 @@ class RecyclerViewLoadMoreScroll : RecyclerView.OnScrollListener {
     private lateinit var onLoadMoreListener: OnLoadMoreListener
     private var isLoading: Boolean = false
     private var lastVisibleItem: Int = 0
-    private var totalItemCount:Int = 0
+    private var totalItemCount: Int = 0
     private var layoutManager: RecyclerView.LayoutManager
 
     fun setLoaded() {
@@ -26,7 +26,7 @@ class RecyclerViewLoadMoreScroll : RecyclerView.OnScrollListener {
         this.onLoadMoreListener = mOnLoadMoreListener
     }
 
-    constructor(layoutManager:LinearLayoutManager) {
+    constructor(layoutManager: LinearLayoutManager) {
         this.layoutManager = layoutManager
     }
 
@@ -40,7 +40,6 @@ class RecyclerViewLoadMoreScroll : RecyclerView.OnScrollListener {
         if (layoutManager is StaggeredGridLayoutManager) {
             val lastVisibleItemPositions =
                 (layoutManager as StaggeredGridLayoutManager).findLastVisibleItemPositions(null)
-            // get maximum element within the list
             lastVisibleItem = getLastVisibleItem(lastVisibleItemPositions)
         } else if (layoutManager is GridLayoutManager) {
             lastVisibleItem = (layoutManager as GridLayoutManager).findLastVisibleItemPosition()

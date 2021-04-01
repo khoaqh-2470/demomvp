@@ -33,7 +33,10 @@ abstract class BaseActivity : AppCompatActivity() {
         showAlertDialog(getString(resId))
     }
 
-    private fun showMessageOptionDialog(message: String, listener: DialogInterface.OnClickListener?) {
+    private fun showMessageOptionDialog(
+        message: String,
+        listener: DialogInterface.OnClickListener?
+    ) {
         AlertDialog.Builder(this)
             .setMessage(message)
             .setCancelable(false)
@@ -46,11 +49,9 @@ abstract class BaseActivity : AppCompatActivity() {
     }
 
     private fun showMessage(title: String?, message: String) {
-        // ignore show dialog if activity stopped
         if (isFinishing) {
             return
         }
-
         showDialogMessage(title!!, message)
     }
 

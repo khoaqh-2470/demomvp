@@ -4,6 +4,7 @@ import android.os.Handler
 import android.os.Looper
 import com.example.demomvp.models.Food
 import com.example.demomvp.services.ApiService
+import com.example.demomvp.services.ParseJson
 import com.example.demomvp.utils.Constants
 import org.json.JSONObject
 
@@ -18,22 +19,7 @@ class MainPresenter : MainContract.Presenter {
                 handler.post {
                     val jsonObject = JSONObject(this)
                     if (jsonObject.getInt(Constants.GET_STATUS) == 200) {
-                        val list = jsonObject.getJSONArray(Constants.GET_DATA)
-                        for (it in 0 until list.length()) {
-                            list.getJSONObject(it).run {
-                                data.add(
-                                    Food(
-                                        getInt(Constants.GET_ID),
-                                        getInt(Constants.GET_CATEGORY),
-                                        getInt(Constants.GET_SPECIALTIES),
-                                        getString(Constants.GET_TITLE),
-                                        getString(Constants.GET_THUMBNAIL),
-                                        getString(Constants.GET_DESCRIPTION)
-                                    )
-                                )
-                            }
-                        }
-                        viewMain?.onSuccess(data)
+                        viewMain?.onSuccess(ParseJson().parseJsonArray(jsonObject))
                     } else {
                         viewMain?.onError(jsonObject.getString(Constants.GET_MESSAGE))
                     }

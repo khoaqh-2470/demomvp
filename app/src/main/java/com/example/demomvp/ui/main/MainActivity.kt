@@ -105,4 +105,9 @@ class MainActivity : BaseActivity(), MainContract.View, BaseAdapter.OnItemClickL
             scrollListener.setLoaded()
         }, 2000)
     }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        mainPresenter.setView(null)
+    }
 }

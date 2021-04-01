@@ -60,6 +60,7 @@ class MainAdapter(
                 itemView.textViewMax.toVisible()
                 itemView.progressBar.toGone()
             }
+            data[position]
         }
     }
 
